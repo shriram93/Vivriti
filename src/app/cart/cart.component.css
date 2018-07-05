@@ -1,0 +1,34 @@
+.cart-header{
+    margin: 16px;
+}
+
+.empty-cart {
+    text-align: center;
+}
+.checkout-cart  {
+    margin: 10vh auto;
+}
+.icons {
+    margin:0 8px;
+    color:#2175EA;
+}
+
+.beer-name {
+    font-size: 2em;
+}
+
+.second-column {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;  
+}
+.remove-button {
+    padding: 0px;
+    margin: 0px;
+    height: 30px;
+    width:30px;
+
+}
+.remove-item {
+    text-align: right;
+}

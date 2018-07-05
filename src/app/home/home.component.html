@@ -1,0 +1,55 @@
+<div *ngIf="rawCatalog.length === 0" class="valign-wrapper">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="rawCatalog.length > 0">
+  <div class="container search-box">
+    <form class="form">
+      <mat-form-field class="full-width">
+        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let item of filteredItems | async" [value]="item.name" (click)="goToItem(item.id)">
+            {{ item.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 card category">
+        <h4 class="filter-heading">Filters</h4>
+        <p class="filter-type">Style</p>
+        <div class="category-list">
+          <div class="form-check" *ngFor="let style of beerStyles;let idx = index">
+            <input class="form-check-input" (change)="selectCategory($event)" type="checkbox" value="" id=`defaultCheck{{idx}}`>
+            <label class="form-check-label" for=`defaultCheck{{idx}}`>
+              {{style}}
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-9">
+        <li class="list-group-item sort-items">
+          <h5>Sort by</h5>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optradio" value="Low to High" [checked]="lowToHigh" (click)="sortContent($event)">
+              <i class="fas fa-bolt icons"></i> Low to High</label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optradio" value="High to Low" [checked]="highToLow" (click)="sortContent($event)">
+              <i class="fas fa-bolt icons"></i> High to Low</label>
+          </div>
+        </li>
+        <app-catalog [items]="currentPageItems" (goAddToCart)="onAddToCart($event)" (goRemoveFromCart)="onRemoveFromCart($event)"></app-catalog>
+        <li class="page-switch">
+          <app-pagination (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()" [pagesToShow]="5" [page]="page" [perPage]="limit"
+            [count]="total"></app-pagination>
+        </li>
+      </div>
+    </div>
+  </div>
+</div>

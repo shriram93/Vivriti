@@ -1,0 +1,13 @@
+<nav aria-label="Page navigation" *ngIf="count > 0">
+  <ul class="pagination">
+    <li class="page-item " (click)="onPrev()" [ngClass]="{'disabled':page === 1 || loading}">
+      <a class="page-link" href="#">Previous</a>
+    </li>
+    <li class="page-item" *ngFor="let pageNum of getPages()" (click)="onPage(pageNum)" [ngClass]="{'active': pageNum === page, 'disabled': loading }">
+      <a class="page-link" href="#">{{ pageNum }}</a>
+    </li>
+    <li class="page-item" (click)="onNext()" [ngClass]="{'disabled':lastPage() || loading}">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
